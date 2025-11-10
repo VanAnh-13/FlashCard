@@ -64,6 +64,9 @@ This is a standalone HTML application that requires no build process or dependen
 FlashCard/
 ├── index.html          # Main dashboard page
 ├── flashcard.html      # Interactive flashcard learning interface
+├── quiz.html           # Interactive quiz with multiple-choice questions
+├── progress.html       # Progress tracking and statistics
+├── profile.html        # User profile and achievements
 └── README.md          # Project documentation
 ```
 
@@ -107,6 +110,37 @@ FlashCard/
   - Key 1: Mark as "I know this"
   - Key 2: Mark as "Review later"
 - **Auto-advance**: Automatically moves to next card after marking progress
+
+### Interactive Quiz
+- **20 Multiple-Choice Questions**: Test your Korean vocabulary knowledge
+- **Instant Feedback**: Get immediate feedback on your answers
+- **Progress Tracking**: Visual progress bar showing quiz completion
+- **Score Summary**: View detailed results with correct/incorrect counts
+- **Audio Pronunciation**: Hear Korean words pronounced correctly
+- **Try Again**: Restart the quiz to improve your score
+- **Randomized Options**: Answer choices are shuffled for better learning
+
+### Progress Tracking Dashboard
+- **Learning Statistics**: Track words learned, daily streak, and overall accuracy
+- **Visual Charts**: View your learning pace over the last 30 days
+- **Monthly Activity Calendar**: See your study activity at a glance
+- **Achievement Tracking**: Monitor your progress towards learning goals
+- **Performance Metrics**: 92% accuracy rate with detailed breakdowns
+- **Motivation Tools**: Keep track of streaks and milestones
+
+### User Profile
+- **Personal Information**: Manage username, email, and password
+- **Profile Picture**: Upload and customize your avatar
+- **Learning Goals**: Set daily word learning targets (10-50 words/day)
+- **Progress Overview**: View total words learned and study streak
+- **Achievement Badges**: Earn and display badges for milestones:
+  - 7-Day Streak
+  - First 50 Words
+  - Grammar Guru
+  - Perfect Score
+  - Top Learner
+  - 30-Day Streak
+- **Daily Goal Progress**: Visual progress bar for daily targets
 
 ## Browser Compatibility
 
