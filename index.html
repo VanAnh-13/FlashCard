@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>VocabKo - Korean Vocabulary Learning Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "coral": "#ff9b85"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Custom scrollbar for horizontal sections */
+        .horizontal-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hover effects for cards */
+        .vocab-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animation for progress bars */
+        .progress-bar {
+            animation: progressFill 1s ease-out;
+        }
+
+        @keyframes progressFill {
+            from {
+                width: 0;
+            }
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="px-4 sm:px-8 md:px-16 lg:px-24 xl:px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-8">
+
+                    <!-- TopNavBar -->
+                    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-800 px-4 sm:px-6 md:px-10 py-3">
+                        <div class="flex items-center gap-8">
+                            <div class="flex items-center gap-4 text-gray-900 dark:text-gray-100">
+                                <div class="size-6 text-primary">
+                                    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                        <path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+                                        <path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em]">VocabKo</h2>
+                            </div>
+                            <div class="hidden md:flex items-center gap-9">
+                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">All Sets</a>
+                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Practice</a>
+                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Profile</a>
+                            </div>
+                        </div>
+                        <div class="flex flex-1 justify-end gap-2 sm:gap-4">
+                            <label class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+                                <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                                    <div class="text-gray-500 dark:text-gray-400 flex bg-gray-100 dark:bg-background-dark items-center justify-center pl-3 rounded-l-lg border-r-0">
+                                        <span class="material-symbols-outlined text-xl">search</span>
+                                    </div>
+                                    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 dark:text-gray-100 focus:outline-0 focus:ring-0 border-none bg-gray-100 dark:bg-background-dark focus:border-none h-full placeholder:text-gray-500 dark:placeholder:text-gray-400 px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal" placeholder="Search" value=""/>
+                                </div>
+                            </label>
+                            <button id="darkModeToggle" class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-gray-100 dark:bg-background-dark text-gray-800 dark:text-gray-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5" title="Toggle dark mode">
+                                <span class="material-symbols-outlined text-xl dark-mode-icon">dark_mode</span>
+                            </button>
+                            <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-gray-100 dark:bg-background-dark text-gray-800 dark:text-gray-200 gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                                <span class="material-symbols-outlined text-xl">notifications</span>
+                            </button>
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer" title="User profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC21O5nSDggWM09pPyighOBnT7NHBBfvBB3xi1rzOpkYL3l8VCnbmSHw2oHXf_p1gnbkiFaSywaf6TXAitjIhEtqBd02pI3GynWdxza0SLTMt_sldqLkCNuuNchLXYG72Eddp2yYe_DdS612t_RcY_jtO8_WnyoBNeY9_xW1DQBhDDOaXMSpzDphirEh9TgKYd-ZC6GO7u3yImUlPah_HRtSIp5rS6CpUknNZYSmRQgqpvbPV7kt31uEdgHLYKza9727CNJ0skKqlM");'></div>
+                        </div>
+                    </header>
+
+                    <!-- HeroSection -->
+                    <div class="@container">
+                        <div class="@[480px]:p-4">
+                            <div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-start justify-end px-4 pb-10 @[480px]:px-10" style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCwf7pc4BHoxxs_DGPUY45KGWEgTat6hNlbuukx1jNiy-OhFM7yeeUPA7GnxxCuMII9SuQTSTYH2r46LfLZecpzXVxCpwOdSy2QF7P9CETuXIRJ4PbBx3r9bKfqI8woF3GCoNMkSzxwlqj8MgimOwUPisaPIOWg1nbUtjM9VdIsIRr358-2B9M8KdTQKQdEMWFl5qmLN91oPOUTIXowP1ssU_u7JaKaiE5Xdh_jN0RkkTamABZrPtEX8DE56hOGA-8kSPqoeVZx7u4");'>
+                                <div class="flex flex-col gap-2 text-left">
+                                    <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">Ready to Learn Korean?</h1>
+                                    <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">Master new words and expand your vocabulary with fun, interactive sets.</h2>
+                                </div>
+                                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                                    <span class="truncate">Start Learning</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recently Studied Sets Section -->
+                    <div>
+                        <h2 class="text-gray-900 dark:text-gray-100 text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Recently Studied Sets</h2>
+                        <div class="flex overflow-x-auto horizontal-scroll [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            <div class="flex items-stretch p-4 gap-4">
+                                <!-- Card 1 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAydT3qpeZa3TmwBMn2gL4r9UH-tfWVxpvN_4hLef7WQ9LQRVglqjXseqNAbAmHN0Q7tCYu3cLBg4CAhFjz2wYHwB6RPxo3JQfksctL29BiSjxGhJoZK-yrIXPbc17wPppYA26FzXaS2w0PinaCpD0gc-xNlaSPkgFyfyatCfIsqrxvrpMYH0f22UP1susvFpSLn7CZ5vKmsanGWyFgiS8_4B4AhbNstPnletlUBXZn47KCOWGGIIgtfldoz2AzU-1SHjnzvEWWnwo");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Everyday Objects</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">30 words</p>
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-2">
+                                            <div class="bg-primary h-1.5 rounded-full progress-bar" style="width: 75%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBKxGWLfvtoRtFOzWTI7w2RyonQkDgVAbfpPnvt33s4R3ntYS2J8CZUke_4OmAI05pGenKjFSgIWW4ZiBfhwQiVzqG18b_EVMkHqIqrikqw5IgldA1BFplJQZ6ZFZSRAwws4iyUP2d6AoVzs5u3z01Drq6BttuQie2VadEUaF8r99Bcvdf6-NEMTxfRGPgU_xaGAYlqJ7sB2jGdWPgViga7ZL_hpZ80xHxxpNGThY4OHyfPI_bqBjv1eYHZ1rUKkuYZW8Q2aGRQVY0");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Food &amp; Drink</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">45 words</p>
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-2">
+                                            <div class="bg-primary h-1.5 rounded-full progress-bar" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDU6PHPR3A_3_jTF_2yCkgI8VB4dbzCueqNnz_whIFq829AR5j7LdXY809JPzjVu7ynF_w_y4VH37h_VNK3b6-RZMjnuqucLoVbp1PA1jd_Zph_AoDFAeRAIcQitnvDbmFNDBfrv-t8iBXu89mifCIwHaxgyJw9pupILhl5PLpapYYhTgXrzQ_9_VqlQHJvIiwCD-vl1alltdzQCFSXgNIQkRZbsKYkGcJ1oqe4xe85PFBWhvsxL7mCE8qHM_FGCxpQQBQIPHYFTTM");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Travel Phrases</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">50 words</p>
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-2">
+                                            <div class="bg-primary h-1.5 rounded-full progress-bar" style="width: 90%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Card 4 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA2MTF5mS0jvYvPNk8qvWxye5CdMZPdHgNKKaPc40_D7I96gPPDZ4u4fQo5S7lIkxtOZ-c7pV5a07586mQgGGtPsn0XzSse5Jed9E1EWjrgwsR2X3uHpVc8d-qV8pAgDQnxIkoUvwHSKvJFrGT8Uqvaq0hbKFHjih1uSAxLdWvl-618LiZ1COjUggkwVro_B3owBooeojPrv2jMGiHZHkGfqA_shSXdY_3xJIzURLTo-2hoSl-Vv0P_ZJLD-JWh5RT9Yln8Q-od8es");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Top 50 Verbs</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">50 words</p>
+                                        <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 mt-2">
+                                            <div class="bg-primary h-1.5 rounded-full progress-bar" style="width: 15%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Featured Vocabulary Sets Section -->
+                    <div>
+                        <h2 class="text-gray-900 dark:text-gray-100 text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Featured Vocabulary Sets</h2>
+                        <div class="flex overflow-x-auto horizontal-scroll [-ms-scrollbar-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                            <div class="flex items-stretch p-4 gap-4">
+                                <!-- Card 1 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBsBdDsqLa-BZXNRLKzdEFYqB4078GxCyjkA6cFJsh9gteym7k4pZHj_6OKSbHCm1ipg1pZZ6hTW4xZPUbEwXurKBaLXRcTdsKVRHeZ_JqLUYDz5e1VYuQOCnKwkdvrGA1OEOQ15zNPzqy1O2GFN57EHPrJejky0fgzKN4plTLbFBPdLQVKhTWXrnT7D5NcIYn6uAsUJrdea8FIw1440Ne95orYd5dqbrQIx2oT6A-EjANfi8aPvRItZJFCkUUuluUB-SONYfQVtg");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Animals</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">35 words</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card 2 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD55CLD-i30fu091cXWQvFj00tfmIhgElWdqE6DfIvmbeYriX3AGbkgNOf_MGFye4V55x_UUHreOtpwbXPPCUuS0ih4RnF72ON6G7OVh0Z8iAX-k_s6v2PMA7uEY0DL3M1jr3J_kXqYzihKiLdbOUGFOutbdMSkc0-6cEZyJ5mJyDrId-7Re5aCVtC6vAtfaK3e2xAwYtrRBM-imUiUvMqbLnROSaaxICMc7qatfhksHlC7a8_sP3jASivTQYHgSCOlO1UAxRdtwv8");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Business Korean</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">60 words</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card 3 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1eBZpPmlu7iDr9bk2JqypuOAKKsLufcCiG6CHpq4PfxIgDQaJVnd7oa5taBWa1mquVHW2Qhdm_mwcAu41abyd0vhvK9dumCAFq0IYZilMM_eK1NyqZUvmpsvoO0iFqNtvjxumL_8Br92TxmjJSGSYDg4BIhF4HM2a-GLSAsZpxmjPKcqMbGODWcLoRImOQAXWoalGHwHuMSzYtk8rCczXvNa54aiC5XQtqSzfvdWMqxoDy-zqTUcnXFgnJFLx4CF4ntSeaVbybig");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Clothing &amp; Fashion</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">40 words</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card 4 -->
+                                <div class="flex h-full flex-1 flex-col gap-4 rounded-lg min-w-60 vocab-card">
+                                    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex flex-col cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBtCyzExw3l3UGVv0G5T7OL8i01hyBPrx-OnigTQJ70hf3x2gTeVX3PNbJvOFMHVIfvlhHrOV3h2lA2hOnEv6ybNGHhTKlsolZ8mYolL-m2q528anl4jPSgDSQoIaJplK-pD32qG41j34JixBwsIycNIvCRFZsD6pT-ljUycO4we7IgGof0U1KfARQRrOdY0QIq9UJVuH6Fli4sz3g84pJhKKhS9JTuNds23Vet7prPxC7OdX5jwtBFi3xacmmLtU8hb-GuS4bExOg");'></div>
+                                    <div>
+                                        <p class="text-gray-900 dark:text-gray-100 text-base font-medium leading-normal">Places in Seoul</p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm font-normal leading-normal">25 words</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weekly Progress Section -->
+                    <div>
+                        <h2 class="text-gray-900 dark:text-gray-100 text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Your Weekly Progress</h2>
+                        <div class="bg-white dark:bg-background-dark/50 rounded-xl p-6">
+                            <div class="flex flex-col sm:flex-row justify-between items-start gap-4">
+                                <div>
+                                    <p class="text-lg font-bold text-gray-900 dark:text-gray-100">You've learned 42 new words this week!</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Keep up the great work.</p>
+                                </div>
+                                <div class="flex items-center gap-2 text-coral">
+                                    <span class="material-symbols-outlined">local_fire_department</span>
+                                    <span class="font-bold">12 Day Streak</span>
+                                </div>
+                            </div>
+                            <div class="mt-8">
+                                <div class="grid grid-cols-7 gap-2 sm:gap-4 items-end h-48">
+                                    <!-- Bar Chart -->
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary/20 dark:bg-primary/30 rounded-t-md progress-bar" style="height: 60%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Mon</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary/20 dark:bg-primary/30 rounded-t-md progress-bar" style="height: 80%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Tue</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary/20 dark:bg-primary/30 rounded-t-md progress-bar" style="height: 45%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Wed</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary/20 dark:bg-primary/30 rounded-t-md progress-bar" style="height: 70%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Thu</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary/20 dark:bg-primary/30 rounded-t-md progress-bar" style="height: 95%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Fri</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary rounded-t-md progress-bar" style="height: 100%;"></div>
+                                        </div>
+                                        <span class="text-xs font-bold text-primary">Sat</span>
+                                    </div>
+                                    <div class="flex flex-col items-center gap-2">
+                                        <div class="w-full h-full flex items-end">
+                                            <div class="w-full bg-primary/20 dark:bg-primary/30 rounded-t-md progress-bar" style="height: 20%;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500 dark:text-gray-400">Sun</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Dark Mode Toggle -->
+    <script>
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const htmlElement = document.documentElement;
+        const darkModeIcon = document.querySelector('.dark-mode-icon');
+
+        // Check for saved user preference, if any, on load
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        htmlElement.classList.remove('light', 'dark');
+        htmlElement.classList.add(currentTheme);
+        updateDarkModeIcon(currentTheme);
+
+        darkModeToggle.addEventListener('click', function() {
+            const isDark = htmlElement.classList.contains('dark');
+
+            if (isDark) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateDarkModeIcon('light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateDarkModeIcon('dark');
+            }
+        });
+
+        function updateDarkModeIcon(theme) {
+            if (theme === 'dark') {
+                darkModeIcon.textContent = 'light_mode';
+            } else {
+                darkModeIcon.textContent = 'dark_mode';
+            }
+        }
+
+        // Add click handlers for card interactions
+        document.querySelectorAll('.vocab-card').forEach(card => {
+            card.addEventListener('click', function() {
+                console.log('Card clicked:', this.querySelector('p').textContent);
+                // Add your navigation logic here
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('input[placeholder="Search"]');
+        if (searchInput) {
+            searchInput.addEventListener('input', function(e) {
+                console.log('Search query:', e.target.value);
+                // Add your search logic here
+            });
+        }
+    </script>
+</body>
+</html>
