@@ -1,6 +1,20 @@
-# VocabKo - Korean Vocabulary Learning Dashboard
+# VocabKo - Korean Vocabulary Learning Platform
 
-A beautiful, responsive web application for learning Korean vocabulary. VocabKo helps users master new words through interactive vocabulary sets, progress tracking, and an engaging user interface.
+A complete full-stack web application for learning Korean vocabulary. VocabKo features a **NestJS backend** with MongoDB database and an interactive frontend with flashcards, quizzes, progress tracking, and user profiles.
+
+## 🎯 Full-Stack Architecture
+
+### Backend
+- **Framework**: NestJS 10.x with TypeScript
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JWT-based auth with Passport
+- **API**: RESTful API with validation
+
+### Frontend
+- **HTML5, CSS3, JavaScript**
+- **Tailwind CSS** for styling
+- **Responsive** design for all devices
+- **Dark mode** support
 
 ## Features
 
@@ -36,27 +50,60 @@ A beautiful, responsive web application for learning Korean vocabulary. VocabKo 
 
 ## Getting Started
 
-### Installation
+### Backend Setup
 
-1. Clone the repository:
+1. **Install Dependencies**
 ```bash
-git clone <repository-url>
-cd FlashCard
+npm install
 ```
 
-2. Open the application:
-```bash
-# Simply open index.html in your browser
-open index.html
-
-# Or use a local server (recommended)
-python -m http.server 8000
-# Then visit http://localhost:8000
+2. **Configure Environment**
+Create a `.env` file (see `.env.example`):
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/vocabko
+JWT_SECRET=your-secret-key
 ```
 
-### No Build Required
+3. **Start MongoDB**
+```bash
+# Local MongoDB
+mongod
 
-This is a standalone HTML application that requires no build process or dependencies. Just open `index.html` in any modern web browser.
+# Or use MongoDB Atlas (cloud)
+```
+
+4. **Run the Backend**
+```bash
+# Development mode
+npm run start:dev
+
+# Production mode
+npm run build
+npm run start:prod
+```
+
+The backend will run on `http://localhost:3000`
+
+### Frontend Access
+
+Once the backend is running, access the application:
+- Main Dashboard: `http://localhost:3000/index.html`
+- Flashcards: `http://localhost:3000/flashcard.html`
+- Quiz: `http://localhost:3000/quiz.html`
+- Progress: `http://localhost:3000/progress.html`
+- Profile: `http://localhost:3000/profile.html`
+
+### API Endpoints
+
+All API endpoints are prefixed with `/api`:
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `GET /api/users/profile` - Get user profile
+- `GET /api/flashcards` - Get all flashcards
+- `GET /api/quiz/questions` - Get quiz questions
+- `POST /api/quiz/submit` - Submit quiz answers
+- `GET /api/progress` - Get user progress
 
 ## Project Structure
 
