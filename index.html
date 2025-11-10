@@ -87,8 +87,8 @@
                                 <h2 class="text-gray-900 dark:text-gray-100 text-lg font-bold leading-tight tracking-[-0.015em]">VocabKo</h2>
                             </div>
                             <div class="hidden md:flex items-center gap-9">
-                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">All Sets</a>
-                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Practice</a>
+                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="index.html">All Sets</a>
+                                <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="flashcard.html">Practice</a>
                                 <a class="text-gray-800 dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary" href="#">Profile</a>
                             </div>
                         </div>
@@ -119,9 +119,9 @@
                                     <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">Ready to Learn Korean?</h1>
                                     <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">Master new words and expand your vocabulary with fun, interactive sets.</h2>
                                 </div>
-                                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                                <a href="flashcard.html" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-primary/90 transition-colors">
                                     <span class="truncate">Start Learning</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -335,8 +335,10 @@
         // Add click handlers for card interactions
         document.querySelectorAll('.vocab-card').forEach(card => {
             card.addEventListener('click', function() {
-                console.log('Card clicked:', this.querySelector('p').textContent);
-                // Add your navigation logic here
+                const cardName = this.querySelector('p').textContent;
+                console.log('Card clicked:', cardName);
+                // Navigate to flashcard page
+                window.location.href = 'flashcard.html';
             });
         });
 

@@ -62,7 +62,8 @@ This is a standalone HTML application that requires no build process or dependen
 
 ```
 FlashCard/
-├── index.html          # Main application file
+├── index.html          # Main dashboard page
+├── flashcard.html      # Interactive flashcard learning interface
 └── README.md          # Project documentation
 ```
 
@@ -92,6 +93,20 @@ FlashCard/
 - Daily learning statistics
 - Streak tracking with fire icon
 - Encouraging messages
+
+### Flashcard Learning Interface
+- **Interactive 3D Flip Cards**: Smooth card flipping animation to reveal translations
+- **50 Korean Vocabulary Words**: Comprehensive word database with examples
+- **Navigation Controls**: Previous, Flip, and Next buttons for easy navigation
+- **Progress Tracking**: Visual progress bar showing completion status
+- **Smart Learning**: Mark cards as "I know this" or "Review later"
+- **Audio Pronunciation**: Text-to-speech for Korean words (Web Speech API)
+- **Keyboard Shortcuts**:
+  - Arrow Left/Right: Navigate between cards
+  - Space/Enter: Flip card
+  - Key 1: Mark as "I know this"
+  - Key 2: Mark as "Review later"
+- **Auto-advance**: Automatically moves to next card after marking progress
 
 ## Browser Compatibility
 
