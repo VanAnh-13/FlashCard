@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Korean Flashcards - Learning Interface</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "success": "#50C878",
+                        "warning": "#F5A623",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .flip-card {
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            transform: rotateY(0deg);
+        }
+        .flip-card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#111318] dark:text-gray-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="px-4 sm:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+
+                    <!-- TopNavBar -->
+                    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-gray-200 dark:border-b-gray-700 px-4 sm:px-6 lg:px-10 py-3">
+                        <div class="flex items-center gap-4 text-[#111318] dark:text-white">
+                            <div class="size-6 text-primary">
+                                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-lg font-bold tracking-[-0.015em]">Korean Flashcards</h2>
+                        </div>
+                        <div class="flex flex-1 justify-end gap-4 sm:gap-8">
+                            <div class="hidden md:flex items-center gap-9">
+                                <a class="text-sm font-medium leading-normal text-[#111318] dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="index.html">Home</a>
+                                <a class="text-sm font-medium leading-normal text-primary dark:text-primary" href="flashcard.html">Flashcards</a>
+                                <a class="text-sm font-medium leading-normal text-[#111318] dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="quiz.html">Quiz</a>
+                                <a class="text-sm font-medium leading-normal text-[#111318] dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="progress.html">Progress</a>
+                                <a class="text-sm font-medium leading-normal text-[#111318] dark:text-gray-300 hover:text-primary dark:hover:text-primary" href="profile.html">Profile</a>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button id="darkModeToggle" class="flex items-center justify-center cursor-pointer rounded-lg h-10 px-3 bg-gray-200/80 dark:bg-gray-700/80 hover:bg-gray-300 dark:hover:bg-gray-600" title="Toggle dark mode">
+                                    <span class="material-symbols-outlined dark-mode-icon">dark_mode</span>
+                                </button>
+                                <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200/80 dark:bg-gray-700/80 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-gray-600">
+                                    <span class="truncate">Log Out</span>
+                                </button>
+                                <a href="profile.html" class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer" title="User profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDyd_b5Eatg3_0AkAZT8nF_XZg8kw7lCQh198H6gHFvhx0O898EhSC2PEmTrKxmMlMBT2BymdA05HzQiNeeEkUq5SL3I7iyYtA7guNyIw2_y-w5ks1aqKlZlA5Z_KXjNWtmTptg4bk9-xJZ55nzPp8_Wm3jSOtsU9pq6H-fDA0K5a77jF53cMzTrRl95PYOZYm21lKq3TrJXo41u62QCj0gY0SmArZUp6_yGV8srPKfP2Fo4eCQwcKNulMGSjyLSqnu0vN4z4xMXoA");'></a>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main class="flex flex-col flex-1 items-center justify-center py-8">
+                        <!-- ProgressBar -->
+                        <div class="w-full max-w-xl mb-6 px-4">
+                            <div class="flex flex-col gap-2">
+                                <div class="flex gap-6 justify-between">
+                                    <p class="text-base font-medium leading-normal text-gray-700 dark:text-gray-300">Daily Review</p>
+                                    <p class="text-sm font-normal leading-normal text-gray-500 dark:text-gray-400"><span id="currentCard">1</span>/<span id="totalCards">50</span></p>
+                                </div>
+                                <div class="rounded-full bg-gray-200 dark:bg-gray-700">
+                                    <div id="progressBar" class="h-2 rounded-full bg-primary transition-all duration-300" style="width: 2%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Flashcard -->
+                        <div class="w-full max-w-xl perspective-[1000px]">
+                            <div class="relative w-full aspect-[3/2] flip-card" id="flashcard">
+                                <!-- Front -->
+                                <div class="absolute w-full h-full p-4 flip-card-front">
+                                    <div class="flex flex-col items-center justify-center rounded-xl h-full shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] bg-white dark:bg-gray-800">
+                                        <p id="koreanWord" class="text-6xl sm:text-7xl font-bold tracking-[-0.015em]">안녕하세요</p>
+                                    </div>
+                                </div>
+                                <!-- Back -->
+                                <div class="absolute w-full h-full p-4 flip-card-back">
+                                    <div class="flex w-full h-full grow flex-col items-stretch justify-center gap-4 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.2)] bg-white dark:bg-gray-800 p-6 text-center">
+                                        <div class="flex justify-center items-center gap-4">
+                                            <p id="englishWord" class="text-2xl sm:text-3xl font-bold text-primary">Hello</p>
+                                            <button id="playAudio" class="flex items-center justify-center size-10 rounded-full hover:bg-primary/10 text-gray-600 dark:text-gray-300 dark:hover:bg-primary/20 dark:hover:text-white">
+                                                <span class="material-symbols-outlined text-2xl">volume_up</span>
+                                            </button>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <p id="exampleKorean" class="text-lg font-medium text-gray-800 dark:text-gray-200">안녕하세요, 만나서 반갑습니다.</p>
+                                            <p id="exampleEnglish" class="text-base text-gray-500 dark:text-gray-400">Hello, nice to meet you.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Navigation Buttons -->
+                        <div class="flex justify-center mt-6 w-full">
+                            <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 max-w-xl justify-center">
+                                <button id="prevBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-gray-200 dark:bg-gray-700 text-[#111318] dark:text-white text-base font-bold leading-normal tracking-[0.015em] grow hover:bg-gray-300 dark:hover:bg-gray-600">
+                                    <span class="material-symbols-outlined mr-2">arrow_back</span>
+                                    <span class="truncate">Previous</span>
+                                </button>
+                                <button id="flipBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white gap-2 text-base font-bold leading-normal tracking-[0.015em] grow hover:opacity-90">
+                                    <span class="material-symbols-outlined">flip</span>
+                                    <span class="truncate">Flip</span>
+                                </button>
+                                <button id="nextBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-gray-200 dark:bg-gray-700 text-[#111318] dark:text-white text-base font-bold leading-normal tracking-[0.015em] grow hover:bg-gray-300 dark:hover:bg-gray-600">
+                                    <span class="truncate">Next</span>
+                                    <span class="material-symbols-outlined ml-2">arrow_forward</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Progress Tracking Buttons -->
+                        <div class="flex justify-center mt-4 w-full">
+                            <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 max-w-xl justify-center">
+                                <button id="knowBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-success/20 dark:bg-success/30 text-success text-base font-bold leading-normal tracking-[0.015em] grow hover:bg-success/30 dark:hover:bg-success/40">
+                                    <span class="material-symbols-outlined mr-2">check_circle</span>
+                                    <span class="truncate">I know this</span>
+                                </button>
+                                <button id="reviewBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-warning/20 dark:bg-warning/30 text-warning text-base font-bold leading-normal tracking-[0.015em] grow hover:bg-warning/30 dark:hover:bg-warning/40">
+                                    <span class="material-symbols-outlined mr-2">bookmark</span>
+                                    <span class="truncate">Review later</span>
+                                </button>
+                            </div>
+                        </div>
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Flashcard data
+        const flashcards = [
+            {
+                korean: "안녕하세요",
+                english: "Hello",
+                exampleKorean: "안녕하세요, 만나서 반갑습니다.",
+                exampleEnglish: "Hello, nice to meet you."
+            },
+            {
+                korean: "감사합니다",
+                english: "Thank you",
+                exampleKorean: "도와주셔서 감사합니다.",
+                exampleEnglish: "Thank you for helping me."
+            },
+            {
+                korean: "사랑해요",
+                english: "I love you",
+                exampleKorean: "나는 너를 정말 사랑해요.",
+                exampleEnglish: "I really love you."
+            },
+            {
+                korean: "미안해요",
+                english: "I'm sorry",
+                exampleKorean: "늦어서 미안해요.",
+                exampleEnglish: "I'm sorry for being late."
+            },
+            {
+                korean: "괜찮아요",
+                english: "It's okay",
+                exampleKorean: "걱정하지 마세요, 괜찮아요.",
+                exampleEnglish: "Don't worry, it's okay."
+            },
+            {
+                korean: "물",
+                english: "Water",
+                exampleKorean: "물 한 잔 주세요.",
+                exampleEnglish: "Please give me a glass of water."
+            },
+            {
+                korean: "밥",
+                english: "Rice / Meal",
+                exampleKorean: "밥 먹었어요?",
+                exampleEnglish: "Did you eat?"
+            },
+            {
+                korean: "학교",
+                english: "School",
+                exampleKorean: "학교에 가요.",
+                exampleEnglish: "I'm going to school."
+            },
+            {
+                korean: "친구",
+                english: "Friend",
+                exampleKorean: "제 친구예요.",
+                exampleEnglish: "This is my friend."
+            },
+            {
+                korean: "가족",
+                english: "Family",
+                exampleKorean: "가족이 중요해요.",
+                exampleEnglish: "Family is important."
+            },
+            {
+                korean: "시간",
+                english: "Time",
+                exampleKorean: "시간이 없어요.",
+                exampleEnglish: "I don't have time."
+            },
+            {
+                korean: "돈",
+                english: "Money",
+                exampleKorean: "돈이 필요해요.",
+                exampleEnglish: "I need money."
+            },
+            {
+                korean: "집",
+                english: "House / Home",
+                exampleKorean: "집에 가고 싶어요.",
+                exampleEnglish: "I want to go home."
+            },
+            {
+                korean: "날씨",
+                english: "Weather",
+                exampleKorean: "오늘 날씨가 좋아요.",
+                exampleEnglish: "The weather is nice today."
+            },
+            {
+                korean: "음식",
+                english: "Food",
+                exampleKorean: "한국 음식이 맛있어요.",
+                exampleEnglish: "Korean food is delicious."
+            },
+            {
+                korean: "커피",
+                english: "Coffee",
+                exampleKorean: "커피 한 잔 주세요.",
+                exampleEnglish: "Please give me a cup of coffee."
+            },
+            {
+                korean: "책",
+                english: "Book",
+                exampleKorean: "책을 읽어요.",
+                exampleEnglish: "I'm reading a book."
+            },
+            {
+                korean: "영화",
+                english: "Movie",
+                exampleKorean: "영화 보러 갈래요?",
+                exampleEnglish: "Do you want to go watch a movie?"
+            },
+            {
+                korean: "음악",
+                english: "Music",
+                exampleKorean: "음악을 듣고 있어요.",
+                exampleEnglish: "I'm listening to music."
+            },
+            {
+                korean: "한국어",
+                english: "Korean language",
+                exampleKorean: "한국어를 공부해요.",
+                exampleEnglish: "I'm studying Korean."
+            },
+            {
+                korean: "오늘",
+                english: "Today",
+                exampleKorean: "오늘은 월요일이에요.",
+                exampleEnglish: "Today is Monday."
+            },
+            {
+                korean: "내일",
+                english: "Tomorrow",
+                exampleKorean: "내일 만나요.",
+                exampleEnglish: "See you tomorrow."
+            },
+            {
+                korean: "어제",
+                english: "Yesterday",
+                exampleKorean: "어제 뭐 했어요?",
+                exampleEnglish: "What did you do yesterday?"
+            },
+            {
+                korean: "지금",
+                english: "Now",
+                exampleKorean: "지금 바빠요.",
+                exampleEnglish: "I'm busy now."
+            },
+            {
+                korean: "이름",
+                english: "Name",
+                exampleKorean: "이름이 뭐예요?",
+                exampleEnglish: "What's your name?"
+            },
+            {
+                korean: "나이",
+                english: "Age",
+                exampleKorean: "나이가 어떻게 되세요?",
+                exampleEnglish: "How old are you?"
+            },
+            {
+                korean: "전화",
+                english: "Phone / Call",
+                exampleKorean: "전화 주세요.",
+                exampleEnglish: "Please call me."
+            },
+            {
+                korean: "일",
+                english: "Work / Job",
+                exampleKorean: "일이 많아요.",
+                exampleEnglish: "I have a lot of work."
+            },
+            {
+                korean: "회사",
+                english: "Company",
+                exampleKorean: "회사에 가요.",
+                exampleEnglish: "I'm going to the company."
+            },
+            {
+                korean: "선생님",
+                english: "Teacher",
+                exampleKorean: "선생님께 물어보세요.",
+                exampleEnglish: "Ask the teacher."
+            },
+            {
+                korean: "학생",
+                english: "Student",
+                exampleKorean: "저는 학생이에요.",
+                exampleEnglish: "I'm a student."
+            },
+            {
+                korean: "병원",
+                english: "Hospital",
+                exampleKorean: "병원에 가야 해요.",
+                exampleEnglish: "I need to go to the hospital."
+            },
+            {
+                korean: "약",
+                english: "Medicine",
+                exampleKorean: "약을 먹어요.",
+                exampleEnglish: "I'm taking medicine."
+            },
+            {
+                korean: "운동",
+                english: "Exercise",
+                exampleKorean: "운동을 해요.",
+                exampleEnglish: "I'm exercising."
+            },
+            {
+                korean: "공부",
+                english: "Study",
+                exampleKorean: "공부하고 있어요.",
+                exampleEnglish: "I'm studying."
+            },
+            {
+                korean: "여행",
+                english: "Travel",
+                exampleKorean: "여행을 가고 싶어요.",
+                exampleEnglish: "I want to go on a trip."
+            },
+            {
+                korean: "사진",
+                english: "Picture / Photo",
+                exampleKorean: "사진 찍어요.",
+                exampleEnglish: "I'm taking a picture."
+            },
+            {
+                korean: "선물",
+                english: "Gift / Present",
+                exampleKorean: "선물을 받았어요.",
+                exampleEnglish: "I received a gift."
+            },
+            {
+                korean: "생일",
+                english: "Birthday",
+                exampleKorean: "생일 축하해요!",
+                exampleEnglish: "Happy birthday!"
+            },
+            {
+                korean: "사람",
+                english: "Person",
+                exampleKorean: "좋은 사람이에요.",
+                exampleEnglish: "They are a good person."
+            },
+            {
+                korean: "장소",
+                english: "Place / Location",
+                exampleKorean: "어떤 장소예요?",
+                exampleEnglish: "What kind of place is it?"
+            },
+            {
+                korean: "방",
+                english: "Room",
+                exampleKorean: "방이 깨끗해요.",
+                exampleEnglish: "The room is clean."
+            },
+            {
+                korean: "문",
+                english: "Door",
+                exampleKorean: "문을 닫으세요.",
+                exampleEnglish: "Please close the door."
+            },
+            {
+                korean: "창문",
+                english: "Window",
+                exampleKorean: "창문을 여세요.",
+                exampleEnglish: "Please open the window."
+            },
+            {
+                korean: "의자",
+                english: "Chair",
+                exampleKorean: "의자에 앉으세요.",
+                exampleEnglish: "Please sit on the chair."
+            },
+            {
+                korean: "책상",
+                english: "Desk",
+                exampleKorean: "책상 위에 있어요.",
+                exampleEnglish: "It's on the desk."
+            },
+            {
+                korean: "컴퓨터",
+                english: "Computer",
+                exampleKorean: "컴퓨터를 켜요.",
+                exampleEnglish: "I'm turning on the computer."
+            },
+            {
+                korean: "핸드폰",
+                english: "Cell phone",
+                exampleKorean: "핸드폰이 없어요.",
+                exampleEnglish: "I don't have my phone."
+            },
+            {
+                korean: "가방",
+                english: "Bag",
+                exampleKorean: "가방을 샀어요.",
+                exampleEnglish: "I bought a bag."
+            },
+            {
+                korean: "옷",
+                english: "Clothes",
+                exampleKorean: "옷을 입어요.",
+                exampleEnglish: "I'm putting on clothes."
+            }
+        ];
+
+        // State
+        let currentIndex = 0;
+        let isFlipped = false;
+        let knownCards = new Set();
+        let reviewLaterCards = new Set();
+
+        // DOM elements
+        const flashcard = document.getElementById('flashcard');
+        const flipBtn = document.getElementById('flipBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const knowBtn = document.getElementById('knowBtn');
+        const reviewBtn = document.getElementById('reviewBtn');
+        const playAudioBtn = document.getElementById('playAudio');
+        const darkModeToggle = document.getElementById('darkModeToggle');
+
+        // Initialize
+        function init() {
+            loadCard(currentIndex);
+            updateProgress();
+            setupDarkMode();
+        }
+
+        // Load card content
+        function loadCard(index) {
+            const card = flashcards[index];
+            document.getElementById('koreanWord').textContent = card.korean;
+            document.getElementById('englishWord').textContent = card.english;
+            document.getElementById('exampleKorean').textContent = card.exampleKorean;
+            document.getElementById('exampleEnglish').textContent = card.exampleEnglish;
+
+            // Reset flip state
+            if (isFlipped) {
+                flashcard.classList.remove('is-flipped');
+                isFlipped = false;
+            }
+
+            // Update button states
+            updateButtonStates();
+        }
+
+        // Update progress
+        function updateProgress() {
+            const current = currentIndex + 1;
+            const total = flashcards.length;
+            document.getElementById('currentCard').textContent = current;
+            document.getElementById('totalCards').textContent = total;
+
+            const percentage = (current / total) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        // Update button states
+        function updateButtonStates() {
+            prevBtn.disabled = currentIndex === 0;
+            prevBtn.style.opacity = currentIndex === 0 ? '0.5' : '1';
+
+            nextBtn.disabled = currentIndex === flashcards.length - 1;
+            nextBtn.style.opacity = currentIndex === flashcards.length - 1 ? '0.5' : '1';
+
+            // Update tracking button styles
+            if (knownCards.has(currentIndex)) {
+                knowBtn.classList.add('ring-2', 'ring-success');
+            } else {
+                knowBtn.classList.remove('ring-2', 'ring-success');
+            }
+
+            if (reviewLaterCards.has(currentIndex)) {
+                reviewBtn.classList.add('ring-2', 'ring-warning');
+            } else {
+                reviewBtn.classList.remove('ring-2', 'ring-warning');
+            }
+        }
+
+        // Flip card
+        flipBtn.addEventListener('click', () => {
+            flashcard.classList.toggle('is-flipped');
+            isFlipped = !isFlipped;
+        });
+
+        // Previous card
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                loadCard(currentIndex);
+                updateProgress();
+            }
+        });
+
+        // Next card
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < flashcards.length - 1) {
+                currentIndex++;
+                loadCard(currentIndex);
+                updateProgress();
+            }
+        });
+
+        // I know this
+        knowBtn.addEventListener('click', () => {
+            if (knownCards.has(currentIndex)) {
+                knownCards.delete(currentIndex);
+            } else {
+                knownCards.add(currentIndex);
+                reviewLaterCards.delete(currentIndex);
+            }
+            updateButtonStates();
+
+            // Auto advance to next card
+            setTimeout(() => {
+                if (currentIndex < flashcards.length - 1) {
+                    nextBtn.click();
+                }
+            }, 300);
+        });
+
+        // Review later
+        reviewBtn.addEventListener('click', () => {
+            if (reviewLaterCards.has(currentIndex)) {
+                reviewLaterCards.delete(currentIndex);
+            } else {
+                reviewLaterCards.add(currentIndex);
+                knownCards.delete(currentIndex);
+            }
+            updateButtonStates();
+
+            // Auto advance to next card
+            setTimeout(() => {
+                if (currentIndex < flashcards.length - 1) {
+                    nextBtn.click();
+                }
+            }, 300);
+        });
+
+        // Play audio (placeholder - would need actual audio files)
+        playAudioBtn.addEventListener('click', () => {
+            // In a real implementation, you would use the Web Speech API or audio files
+            const utterance = new SpeechSynthesisUtterance(flashcards[currentIndex].korean);
+            utterance.lang = 'ko-KR';
+            window.speechSynthesis.speak(utterance);
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    if (!prevBtn.disabled) prevBtn.click();
+                    break;
+                case 'ArrowRight':
+                    if (!nextBtn.disabled) nextBtn.click();
+                    break;
+                case ' ':
+                case 'Enter':
+                    e.preventDefault();
+                    flipBtn.click();
+                    break;
+                case '1':
+                    knowBtn.click();
+                    break;
+                case '2':
+                    reviewBtn.click();
+                    break;
+            }
+        });
+
+        // Dark mode
+        function setupDarkMode() {
+            const htmlElement = document.documentElement;
+            const darkModeIcon = document.querySelector('.dark-mode-icon');
+
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(currentTheme);
+            updateDarkModeIcon(currentTheme);
+
+            darkModeToggle.addEventListener('click', () => {
+                const isDark = htmlElement.classList.contains('dark');
+
+                if (isDark) {
+                    htmlElement.classList.remove('dark');
+                    htmlElement.classList.add('light');
+                    localStorage.setItem('theme', 'light');
+                    updateDarkModeIcon('light');
+                } else {
+                    htmlElement.classList.remove('light');
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateDarkModeIcon('dark');
+                }
+            });
+
+            function updateDarkModeIcon(theme) {
+                if (theme === 'dark') {
+                    darkModeIcon.textContent = 'light_mode';
+                } else {
+                    darkModeIcon.textContent = 'dark_mode';
+                }
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

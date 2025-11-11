@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>User Profile - Korean Vocabulary App</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111318] dark:text-white">
+    <div class="relative flex min-h-screen w-full flex-row">
+        <!-- SideNavBar -->
+        <div class="hidden lg:flex w-64 flex-col border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark p-4">
+            <div class="flex h-full flex-col justify-between">
+                <div class="flex flex-col gap-4">
+                    <div class="flex gap-3 items-center">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" title="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAopsEB54ie4p93HTeYgepY-41WaNHHOMFTI0PsQFzX1HpkLQSoR1XdXk4MwYtoA28BHebFaBYkZo8YXQr5LBDWm3kiFRy-8MTYGNRWOHaXLABd6BXm_eAz25nXRAcvan44M2yD3QofNU6-5sNrkxMemvuJALNaqT3Vr2rII8zhyJxLLElaAAyu6LN-GifOhbLdDrnxox02AJRj7l9As3CLu_HG1bFKzepCImnmMH36pT6TOhZ0HPuDdj0R4HtfcoVjJ829xOnW53Y");'></div>
+                        <div class="flex flex-col">
+                            <h1 class="text-[#111318] dark:text-gray-200 text-base font-medium leading-normal">Kim Min-jun</h1>
+                            <p class="text-[#616f89] dark:text-gray-400 text-sm font-normal leading-normal">Beginner Level</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col gap-2 mt-4">
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="index.html">
+                            <span class="material-symbols-outlined text-[#111318] dark:text-gray-300">dashboard</span>
+                            <p class="text-[#111318] dark:text-gray-300 text-sm font-medium leading-normal">Dashboard</p>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="flashcard.html">
+                            <span class="material-symbols-outlined text-[#111318] dark:text-gray-300">school</span>
+                            <p class="text-[#111318] dark:text-gray-300 text-sm font-medium leading-normal">Learn</p>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="quiz.html">
+                            <span class="material-symbols-outlined text-[#111318] dark:text-gray-300">refresh</span>
+                            <p class="text-[#111318] dark:text-gray-300 text-sm font-medium leading-normal">Review</p>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 dark:bg-primary/20" href="profile.html">
+                            <span class="material-symbols-outlined text-primary fill">person</span>
+                            <p class="text-primary text-sm font-medium leading-normal">Profile</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <button id="darkModeToggleSidebar" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined text-[#111318] dark:text-gray-300 dark-mode-icon-sidebar">dark_mode</span>
+                        <p class="text-[#111318] dark:text-gray-300 text-sm font-medium leading-normal">Toggle Theme</p>
+                    </button>
+                    <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+                        <span class="material-symbols-outlined text-[#111318] dark:text-gray-300">logout</span>
+                        <p class="text-[#111318] dark:text-gray-300 text-sm font-medium leading-normal">Log Out</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+            <div class="max-w-7xl mx-auto">
+                <!-- Page Heading -->
+                <div class="flex flex-wrap justify-between gap-3 mb-8">
+                    <p class="text-[#111318] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">My Profile</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left Column -->
+                    <div class="lg:col-span-2 flex flex-col gap-8">
+                        <!-- Profile Header -->
+                        <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                            <div class="flex w-full flex-col gap-4 sm:flex-row sm:justify-between sm:items-center">
+                                <div class="flex gap-4 items-center">
+                                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24" title="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDk-G4EoeNmQEuEstTNirR-RvGLvWFv05XpuB2vmnLiu6EG9JyjY3rQUmWicWObspKJNXoHyWiggQiHXk8NC4XhrxjWyzRhVy7IUbmjqzWIUDPjiV8lwIUWOAvcLvtEAIpF9VC7_i2m8FgQ3VuPNfKlBy4UjhL1R3ZVmJzO9kTOB9Nj-hocdh4vzBij6C-zS4frBdAFIXtC2bt2e1hoNaffWfq9gsEojXLt3CFVgBpN0VRdughgkmxa-qmOyPulaQp37jW9OSXa2Yk");'></div>
+                                    <div class="flex flex-col justify-center">
+                                        <p class="text-[#111318] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Kim Min-jun</p>
+                                        <p class="text-[#616f89] dark:text-gray-400 text-base font-normal leading-normal">kim.minjun@email.com</p>
+                                    </div>
+                                </div>
+                                <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-100 dark:bg-gray-800 text-[#111318] dark:text-gray-200 text-sm font-bold leading-normal tracking-[0.015em] w-full sm:w-auto hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                                    <span class="truncate">Upload Photo</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- User Information Card -->
+                        <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                            <h2 class="text-[#111318] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5 border-b border-gray-200 dark:border-gray-800">User Information</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
+                                <label class="flex flex-col">
+                                    <p class="text-[#111318] dark:text-gray-300 text-base font-medium leading-normal pb-2">Username</p>
+                                    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-gray-800/50 focus:border-primary h-12 placeholder:text-[#616f89] dark:placeholder:text-gray-500 p-3 text-base font-normal leading-normal" value="kim.minjun"/>
+                                </label>
+                                <label class="flex flex-col">
+                                    <p class="text-[#111318] dark:text-gray-300 text-base font-medium leading-normal pb-2">Email</p>
+                                    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-gray-800/50 focus:border-primary h-12 placeholder:text-[#616f89] dark:placeholder:text-gray-500 p-3 text-base font-normal leading-normal" type="email" value="kim.minjun@email.com"/>
+                                </label>
+                                <label class="flex flex-col">
+                                    <p class="text-[#111318] dark:text-gray-300 text-base font-medium leading-normal pb-2">Password</p>
+                                    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111318] dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-gray-800/50 focus:border-primary h-12 placeholder:text-[#616f89] dark:placeholder:text-gray-500 p-3 text-base font-normal leading-normal" type="password" value="••••••••••••"/>
+                                </label>
+                            </div>
+                            <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800 flex justify-end">
+                                <button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                                    <span class="truncate">Save Changes</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Learning Goals -->
+                        <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                            <h2 class="text-[#111318] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-3">Learning Goals</h2>
+                            <p class="text-gray-500 dark:text-gray-400 mb-6">Set a daily target to stay motivated.</p>
+                            <div class="flex flex-col sm:flex-row items-center gap-4">
+                                <p class="text-[#111318] dark:text-gray-300">I want to learn</p>
+                                <select class="form-select w-full sm:w-auto rounded-lg text-[#111318] dark:text-white border border-[#dbdfe6] dark:border-gray-700 bg-white dark:bg-gray-800/50 focus:border-primary focus:ring-2 focus:ring-primary/50">
+                                    <option>10</option>
+                                    <option selected="">20</option>
+                                    <option>30</option>
+                                    <option>50</option>
+                                </select>
+                                <p class="text-[#111318] dark:text-gray-300">words per day.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="lg:col-span-1 flex flex-col gap-8">
+                        <!-- Progress & Achievements -->
+                        <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                            <h2 class="text-[#111318] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">My Progress</h2>
+                            <div class="space-y-6">
+                                <div class="flex justify-between items-center text-[#111318] dark:text-gray-300">
+                                    <span>Words Learned</span>
+                                    <span class="font-bold text-lg text-primary">1,204</span>
+                                </div>
+                                <div class="flex justify-between items-center text-[#111318] dark:text-gray-300">
+                                    <span>Study Streak</span>
+                                    <span class="font-bold text-lg text-primary">28 Days</span>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-base font-medium text-[#111318] dark:text-gray-300">Daily Goal Progress</span>
+                                        <span class="text-sm font-medium text-primary">75%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                                        <div class="bg-primary h-2.5 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="bg-white dark:bg-gray-900/50 p-6 rounded-xl border border-gray-200 dark:border-gray-800">
+                            <h2 class="text-[#111318] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em] pb-5">Achievements</h2>
+                            <div class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 gap-4">
+                                <!-- Earned Badge -->
+                                <div class="flex flex-col items-center text-center gap-2">
+                                    <div class="bg-primary/10 dark:bg-primary/20 p-3 rounded-full">
+                                        <span class="material-symbols-outlined text-primary text-4xl">local_fire_department</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-[#111318] dark:text-gray-300">7-Day Streak</p>
+                                </div>
+                                <!-- Earned Badge -->
+                                <div class="flex flex-col items-center text-center gap-2">
+                                    <div class="bg-primary/10 dark:bg-primary/20 p-3 rounded-full">
+                                        <span class="material-symbols-outlined text-primary text-4xl">rocket_launch</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-[#111318] dark:text-gray-300">First 50 Words</p>
+                                </div>
+                                <!-- Earned Badge -->
+                                <div class="flex flex-col items-center text-center gap-2">
+                                    <div class="bg-primary/10 dark:bg-primary/20 p-3 rounded-full">
+                                        <span class="material-symbols-outlined text-primary text-4xl">workspace_premium</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-[#111318] dark:text-gray-300">Grammar Guru</p>
+                                </div>
+                                <!-- Unearned Badge -->
+                                <div class="flex flex-col items-center text-center gap-2 opacity-40">
+                                    <div class="bg-gray-200 dark:bg-gray-700 p-3 rounded-full">
+                                        <span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-4xl">military_tech</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Perfect Score</p>
+                                </div>
+                                <!-- Unearned Badge -->
+                                <div class="flex flex-col items-center text-center gap-2 opacity-40">
+                                    <div class="bg-gray-200 dark:bg-gray-700 p-3 rounded-full">
+                                        <span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-4xl">social_leaderboard</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Top Learner</p>
+                                </div>
+                                <!-- Unearned Badge -->
+                                <div class="flex flex-col items-center text-center gap-2 opacity-40">
+                                    <div class="bg-gray-200 dark:bg-gray-700 p-3 rounded-full">
+                                        <span class="material-symbols-outlined text-gray-500 dark:text-gray-400 text-4xl">calendar_month</span>
+                                    </div>
+                                    <p class="text-xs font-medium text-gray-500 dark:text-gray-400">30-Day Streak</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Dark mode setup
+        function setupDarkMode() {
+            const htmlElement = document.documentElement;
+            const darkModeToggleSidebar = document.getElementById('darkModeToggleSidebar');
+            const darkModeIconSidebar = document.querySelector('.dark-mode-icon-sidebar');
+
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(currentTheme);
+            updateDarkModeIcon(currentTheme);
+
+            if (darkModeToggleSidebar) {
+                darkModeToggleSidebar.addEventListener('click', () => {
+                    const isDark = htmlElement.classList.contains('dark');
+
+                    if (isDark) {
+                        htmlElement.classList.remove('dark');
+                        htmlElement.classList.add('light');
+                        localStorage.setItem('theme', 'light');
+                        updateDarkModeIcon('light');
+                    } else {
+                        htmlElement.classList.remove('light');
+                        htmlElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                        updateDarkModeIcon('dark');
+                    }
+                });
+            }
+
+            function updateDarkModeIcon(theme) {
+                if (darkModeIconSidebar) {
+                    if (theme === 'dark') {
+                        darkModeIconSidebar.textContent = 'light_mode';
+                    } else {
+                        darkModeIconSidebar.textContent = 'dark_mode';
+                    }
+                }
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupDarkMode();
+        });
+    </script>
+</body>
+</html>

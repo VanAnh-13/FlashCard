@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Progress - Learn Korean</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2b6cee",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "card-light": "#ffffff",
+                        "card-dark": "#182131",
+                        "text-light-primary": "#111318",
+                        "text-dark-primary": "#f0f2f4",
+                        "text-light-secondary": "#616f89",
+                        "text-dark-secondary": "#a0aec0",
+                        "border-light": "#dbdfe6",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+    <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <div class="px-4 sm:px-8 md:px-12 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col w-full max-w-[1200px] flex-1">
+
+                    <!-- Header -->
+                    <header class="flex items-center justify-between whitespace-nowrap bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-xl px-6 py-3 shadow-sm">
+                        <div class="flex items-center gap-4 text-text-light-primary dark:text-text-dark-primary">
+                            <div class="size-6 text-primary">
+                                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M39.5563 34.1455V13.8546C39.5563 15.708 36.8773 17.3437 32.7927 18.3189C30.2914 18.916 27.263 19.2655 24 19.2655C20.737 19.2655 17.7086 18.916 15.2073 18.3189C11.1227 17.3437 8.44365 15.708 8.44365 13.8546V34.1455C8.44365 35.9988 11.1227 37.6346 15.2073 38.6098C17.7086 39.2069 20.737 39.5564 24 39.5564C27.263 39.5564 30.2914 39.2069 32.7927 38.6098C36.8773 37.6346 39.5563 35.9988 39.5563 34.1455Z" fill="currentColor"></path>
+                                    <path clip-rule="evenodd" d="M10.4485 13.8519C10.4749 13.9271 10.6203 14.246 11.379 14.7361C12.298 15.3298 13.7492 15.9145 15.6717 16.3735C18.0007 16.9296 20.8712 17.2655 24 17.2655C27.1288 17.2655 29.9993 16.9296 32.3283 16.3735C34.2508 15.9145 35.702 15.3298 36.621 14.7361C37.3796 14.246 37.5251 13.9271 37.5515 13.8519C37.5287 13.7876 37.4333 13.5973 37.0635 13.2931C36.5266 12.8516 35.6288 12.3647 34.343 11.9175C31.79 11.0295 28.1333 10.4437 24 10.4437C19.8667 10.4437 16.2099 11.0295 13.657 11.9175C12.3712 12.3647 11.4734 12.8516 10.9365 13.2931C10.5667 13.5973 10.4713 13.7876 10.4485 13.8519ZM37.5563 18.7877C36.3176 19.3925 34.8502 19.8839 33.2571 20.2642C30.5836 20.9025 27.3973 21.2655 24 21.2655C20.6027 21.2655 17.4164 20.9025 14.7429 20.2642C13.1498 19.8839 11.6824 19.3925 10.4436 18.7877V34.1275C10.4515 34.1545 10.5427 34.4867 11.379 35.027C12.298 35.6207 13.7492 36.2054 15.6717 36.6644C18.0007 37.2205 20.8712 37.5564 24 37.5564C27.1288 37.5564 29.9993 37.2205 32.3283 36.6644C34.2508 36.2054 35.702 35.6207 36.621 35.027C37.4573 34.4867 37.5485 34.1546 37.5563 34.1275V18.7877ZM41.5563 13.8546V34.1455C41.5563 36.1078 40.158 37.5042 38.7915 38.3869C37.3498 39.3182 35.4192 40.0389 33.2571 40.5551C30.5836 41.1934 27.3973 41.5564 24 41.5564C20.6027 41.5564 17.4164 41.1934 14.7429 40.5551C12.5808 40.0389 10.6502 39.3182 9.20848 38.3869C7.84205 37.5042 6.44365 36.1078 6.44365 34.1455L6.44365 13.8546C6.44365 12.2684 7.37223 11.0454 8.39581 10.2036C9.43325 9.3505 10.8137 8.67141 12.343 8.13948C15.4203 7.06909 19.5418 6.44366 24 6.44366C28.4582 6.44366 32.5797 7.06909 35.657 8.13948C37.1863 8.67141 38.5667 9.3505 39.6042 10.2036C40.6278 11.0454 41.5563 12.2684 41.5563 13.8546Z" fill="currentColor" fill-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <h2 class="text-text-light-primary dark:text-text-dark-primary text-lg font-bold leading-tight tracking-[-0.015em]">VocabKo</h2>
+                        </div>
+                        <div class="hidden md:flex flex-1 justify-end items-center gap-8">
+                            <div class="flex items-center gap-9">
+                                <a class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Learn</a>
+                                <a class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="flashcard.html">Review</a>
+                                <a class="text-primary text-sm font-bold leading-normal" href="progress.html">Progress</a>
+                                <a class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary transition-colors" href="profile.html">Profile</a>
+                            </div>
+                            <button id="darkModeToggle" class="flex items-center justify-center cursor-pointer rounded-lg h-10 px-3 bg-gray-200/80 dark:bg-gray-700/80 hover:bg-gray-300 dark:hover:bg-gray-600" title="Toggle dark mode">
+                                <span class="material-symbols-outlined dark-mode-icon">dark_mode</span>
+                            </button>
+                            <a href="quiz.html" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+                                <span class="truncate">Start New Lesson</span>
+                            </a>
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer" onclick="window.location.href='profile.html'" title="User profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0qyQR-_KZuR9ltpbDEIdJvCSpHl6snQ2s8GaS6r3CCH2whCKsMnQtb8Soj0Ixcf6kXq1x5NABFVpnS-688PF4CL5ZoS6iyPj3vZdxYRJqCOFjOqHI44dlqDZlip4c8Wn78Zfz0mHRLap3auPVMDdoU8HAoFQ22pQZwKqZCUtZsC3-G391LujD1-nXrbZBvPYiS5B65wDggYUgzCKlnTTPZ7Sl3DUC6MWmjc8vgnksam-HOzrNjBcRa8_7UG0foo0cfBTHgxW8I0U");'></div>
+                        </div>
+                        <button class="md:hidden text-text-light-primary dark:text-text-dark-primary">
+                            <span class="material-symbols-outlined">menu</span>
+                        </button>
+                    </header>
+
+                    <main class="mt-8">
+                        <!-- Page Title -->
+                        <div class="flex flex-wrap justify-between gap-4 p-4">
+                            <div class="flex min-w-72 flex-col gap-2">
+                                <p class="text-text-light-primary dark:text-text-dark-primary text-4xl font-black leading-tight tracking-[-0.033em]">Your Learning Journey</p>
+                                <p class="text-text-light-secondary dark:text-text-dark-secondary text-base font-normal leading-normal">Keep up the great work! Here's a look at your progress.</p>
+                            </div>
+                        </div>
+
+                        <!-- Stats Cards -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+                            <!-- Words Learned -->
+                            <div class="flex flex-col gap-4 rounded-xl p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm">
+                                <div class="flex items-center gap-3 text-text-light-primary dark:text-text-dark-primary">
+                                    <span class="material-symbols-outlined text-primary">auto_stories</span>
+                                    <p class="text-base font-medium leading-normal">Words Learned</p>
+                                </div>
+                                <p class="text-text-light-primary dark:text-text-dark-primary tracking-light text-4xl font-bold leading-tight">482</p>
+                                <p class="text-green-500 text-sm font-medium leading-normal">+12 since last week</p>
+                            </div>
+
+                            <!-- Daily Streak -->
+                            <div class="flex flex-col gap-4 rounded-xl p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm">
+                                <div class="flex items-center gap-3 text-text-light-primary dark:text-text-dark-primary">
+                                    <span class="material-symbols-outlined text-orange-500">local_fire_department</span>
+                                    <p class="text-base font-medium leading-normal">Daily Streak</p>
+                                </div>
+                                <p class="text-text-light-primary dark:text-text-dark-primary tracking-light text-4xl font-bold leading-tight">15 Days</p>
+                                <p class="text-green-500 text-sm font-medium leading-normal">Keep the flame alive!</p>
+                            </div>
+
+                            <!-- Overall Accuracy -->
+                            <div class="flex flex-col gap-4 rounded-xl p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm">
+                                <div class="flex items-center gap-3 text-text-light-primary dark:text-text-dark-primary">
+                                    <span class="material-symbols-outlined text-teal-500">target</span>
+                                    <p class="text-base font-medium leading-normal">Overall Accuracy</p>
+                                </div>
+                                <div class="flex items-center justify-center py-2">
+                                    <div class="relative size-32">
+                                        <svg class="size-full" height="36" viewBox="0 0 36 36" width="36" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke="#e6e6e6" stroke-width="3"></circle>
+                                            <circle class="dark:stroke-primary stroke-primary" cx="18" cy="18" fill="transparent" r="15.91549430918954" stroke-dasharray="92 8" stroke-dashoffset="25" stroke-width="3"></circle>
+                                        </svg>
+                                        <div class="absolute inset-0 flex items-center justify-center">
+                                            <p class="text-text-light-primary dark:text-text-dark-primary text-2xl font-bold">92%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Charts Section -->
+                        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 p-4">
+                            <!-- Learning Pace Chart -->
+                            <div class="lg:col-span-3 flex flex-col gap-4 rounded-xl p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm">
+                                <h2 class="text-text-light-primary dark:text-text-dark-primary text-lg font-bold">Learning Pace (Last 30 Days)</h2>
+                                <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm -mt-3">New words learned over time</p>
+                                <div class="w-full h-64 flex items-center justify-center">
+                                    <canvas id="learningPaceChart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Monthly Activity Calendar -->
+                            <div class="lg:col-span-2 flex flex-col rounded-xl p-6 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark shadow-sm">
+                                <h2 class="text-text-light-primary dark:text-text-dark-primary text-lg font-bold">Monthly Activity</h2>
+                                <div class="flex flex-col flex-1">
+                                    <div class="flex items-center p-1 justify-between">
+                                        <button id="prevMonth" class="text-text-light-secondary dark:text-text-dark-secondary hover:text-primary dark:hover:text-primary transition-colors">
+                                            <span class="material-symbols-outlined">chevron_left</span>
+                                        </button>
+                                        <p id="currentMonth" class="text-text-light-primary dark:text-text-dark-primary text-base font-bold leading-tight flex-1 text-center">November 2024</p>
+                                        <button id="nextMonth" class="text-text-light-secondary dark:text-text-dark-secondary hover:text-primary dark:hover:text-primary transition-colors">
+                                            <span class="material-symbols-outlined">chevron_right</span>
+                                        </button>
+                                    </div>
+                                    <div class="grid grid-cols-7 gap-y-1">
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">S</p>
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">M</p>
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">T</p>
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">W</p>
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">T</p>
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">F</p>
+                                        <p class="text-text-light-secondary dark:text-text-dark-secondary text-xs font-bold flex h-10 w-full items-center justify-center">S</p>
+
+                                        <!-- Days will be dynamically generated -->
+                                        <div id="calendarDays"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dark mode setup
+        function setupDarkMode() {
+            const htmlElement = document.documentElement;
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const darkModeIcon = document.querySelector('.dark-mode-icon');
+
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            htmlElement.classList.remove('light', 'dark');
+            htmlElement.classList.add(currentTheme);
+            updateDarkModeIcon(currentTheme);
+
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', () => {
+                    const isDark = htmlElement.classList.contains('dark');
+
+                    if (isDark) {
+                        htmlElement.classList.remove('dark');
+                        htmlElement.classList.add('light');
+                        localStorage.setItem('theme', 'light');
+                        updateDarkModeIcon('light');
+                    } else {
+                        htmlElement.classList.remove('light');
+                        htmlElement.classList.add('dark');
+                        localStorage.setItem('theme', 'dark');
+                        updateDarkModeIcon('dark');
+                    }
+                });
+            }
+
+            function updateDarkModeIcon(theme) {
+                if (darkModeIcon) {
+                    if (theme === 'dark') {
+                        darkModeIcon.textContent = 'light_mode';
+                    } else {
+                        darkModeIcon.textContent = 'dark_mode';
+                    }
+                }
+            }
+        }
+
+        // Generate calendar
+        function generateCalendar() {
+            const calendarDays = document.getElementById('calendarDays');
+            const activityLevels = [0, 20, 50, 80, 100]; // Activity intensity levels
+
+            // Simulate activity data for November 2024
+            const activities = {};
+            for (let i = 1; i <= 30; i++) {
+                const randomLevel = activityLevels[Math.floor(Math.random() * activityLevels.length)];
+                activities[i] = randomLevel;
+            }
+
+            // Start November 2024 on Friday (day 5)
+            const startDay = 5;
+
+            // Add empty cells for days before the 1st
+            for (let i = 0; i < startDay; i++) {
+                const emptyDiv = document.createElement('div');
+                calendarDays.appendChild(emptyDiv);
+            }
+
+            // Generate days
+            for (let day = 1; day <= 30; day++) {
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'h-10 w-full text-sm font-medium leading-normal flex items-center justify-center';
+
+                const innerDiv = document.createElement('div');
+                innerDiv.className = 'flex size-8 items-center justify-center rounded-lg';
+                innerDiv.textContent = day;
+
+                const activity = activities[day];
+                if (activity === 100) {
+                    innerDiv.classList.add('bg-primary', 'text-white');
+                } else if (activity >= 50) {
+                    innerDiv.classList.add('bg-primary/80', 'text-text-light-primary', 'dark:text-text-dark-primary');
+                } else if (activity >= 20) {
+                    innerDiv.classList.add('bg-primary/20', 'text-text-light-primary', 'dark:text-text-dark-primary');
+                } else {
+                    innerDiv.classList.add('text-text-light-primary', 'dark:text-text-dark-primary');
+                }
+
+                dayDiv.appendChild(innerDiv);
+                calendarDays.appendChild(dayDiv);
+            }
+        }
+
+        // Simple chart simulation
+        function setupChart() {
+            const canvas = document.getElementById('learningPaceChart');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            const width = canvas.parentElement.clientWidth;
+            const height = 250;
+            canvas.width = width;
+            canvas.height = height;
+
+            // Sample data for 30 days
+            const data = [5, 8, 12, 7, 15, 18, 22, 20, 25, 28, 24, 30, 35, 32, 38, 40, 42, 38, 45, 48, 46, 50, 52, 48, 55, 58, 54, 60, 62, 58];
+            const maxValue = Math.max(...data);
+            const padding = 40;
+            const chartWidth = width - padding * 2;
+            const chartHeight = height - padding * 2;
+
+            // Clear canvas
+            ctx.clearRect(0, 0, width, height);
+
+            // Get current theme
+            const isDark = document.documentElement.classList.contains('dark');
+            const lineColor = '#2b6cee';
+            const gridColor = isDark ? '#2d3748' : '#e5e7eb';
+            const textColor = isDark ? '#a0aec0' : '#616f89';
+
+            // Draw grid lines
+            ctx.strokeStyle = gridColor;
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 5; i++) {
+                const y = padding + (chartHeight / 5) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(width - padding, y);
+                ctx.stroke();
+            }
+
+            // Draw line chart
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+
+            data.forEach((value, index) => {
+                const x = padding + (chartWidth / (data.length - 1)) * index;
+                const y = padding + chartHeight - (value / maxValue) * chartHeight;
+
+                if (index === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            });
+
+            ctx.stroke();
+
+            // Draw points
+            ctx.fillStyle = lineColor;
+            data.forEach((value, index) => {
+                const x = padding + (chartWidth / (data.length - 1)) * index;
+                const y = padding + chartHeight - (value / maxValue) * chartHeight;
+
+                ctx.beginPath();
+                ctx.arc(x, y, 4, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Draw labels
+            ctx.fillStyle = textColor;
+            ctx.font = '12px Lexend';
+            ctx.textAlign = 'center';
+
+            // X-axis labels (show every 5 days)
+            for (let i = 0; i < data.length; i += 5) {
+                const x = padding + (chartWidth / (data.length - 1)) * i;
+                ctx.fillText(`Day ${i + 1}`, x, height - 10);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupDarkMode();
+            generateCalendar();
+            setupChart();
+
+            // Redraw chart on window resize
+            window.addEventListener('resize', setupChart);
+        });
+    </script>
+</body>
+</html>
